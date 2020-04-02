@@ -249,6 +249,7 @@
           .done(function (data) {
             // log data to the console so we can see
             alert("Saved");
+            $('input[name=cnic]').focus();
             $('form input').val('');
             get();
             // here we will handle errors and validation messages
