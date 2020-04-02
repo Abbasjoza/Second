@@ -63,40 +63,54 @@
         <em>LOCKDOWN 2020</em>
       </h3>
       <form action="/api/courses" method="post">
-        <div class="col">
-          <em>Enter your CNIC/FAMLIYNO</em>
-          <input name="cnic" onchange="validate();" required type="text" class="form-control" placeholder="Enter your CNIC/FAMLIYNO">
+        <div class="row">
+          <div class="col">
+            <em>Enter your CNIC/FAMLIYNO</em>
+            <input class="form-control form-control-sm" name="cnic" onchange="validate();" required type="text"
+              class="form-control" placeholder="Enter your CNIC/FAMLIYNO">
+          </div>
+          <div class="col">
+            <em>Enter your CELL</em>
+            <input class="form-control form-control-sm" name="cell" required type="text" class="form-control"
+              placeholder="Enter your CELL">
+          </div>
         </div>
-        <div class="col">
-          <em>Enter your CELL</em>
-          <input name="cell" required type="text" class="form-control" placeholder="Enter your CELL">
+        <div class="row">
+          <div class="col">
+            <em>Enter your full Name</em>
+            <input class="form-control form-control-sm" name="name" required type="text" class="form-control"
+              placeholder="Enter your full NAME">
+          </div>
+          <div class="col">
+            <em>Enter your full Address</em>
+            <input class="form-control form-control-sm" name="address" required type="text" class="form-control"
+              placeholder="Enter your full address">
+          </div>
         </div>
-        <div class="col">
-          <em>Enter your full Name</em>
-          <input name="name" required type="text" class="form-control" placeholder="Enter your full NAME">
+        <div class="row">
+          <div class="col">
+            <em>Enter your AREA</em>
+            <input class="form-control form-control-sm" name="area" required type="text" class="form-control"
+              placeholder="Enter your AREA">
+          </div>
+          <div class="col">
+            <em>Enter your CAST</em>
+            <input class="form-control form-control-sm" name="cast" required type="text" class="form-control"
+              placeholder="Enter your CAST">
+          </div>
         </div>
-        <div class="col">
-          <em>Enter your full Address</em>
-          <input name="address" required type="text" class="form-control" placeholder="Enter your full address">
-        </div>
-        <div class="col">
-          <em>Enter your AREA</em>
-          <input name="area" required type="text" class="form-control" placeholder="Enter your AREA">
-        </div>
-        <div class="col">
-          <em>Enter your CAST</em>
-          <input name="cast" required type="text" class="form-control" placeholder="Enter your CAST">
-        </div>
-        <div class="col mb">
+        <div class="row">
+        <div class="col mb-2">
           <em>Enter your Remarks</em>
-          <input name="remarks" type="text" class="form-control" placeholder="Enter your Remarks">
+          <input class="form-control form-control-sm" name="remarks" type="text" class="form-control"
+            placeholder="Enter your Remarks">
         </div>
+      </div>
         <button class="btn btn-primary btn-xl js-scroll-trigger">SUBMIT</button>
       </form>
     </div>
     <div class="overlay"></div>
   </header>
-
 
 
 
@@ -143,32 +157,32 @@
     var myList = [];
 
 
-function get(){
+    function get() {
 
-  $.ajax({
-              type: 'GET', // define the type of HTTP verb we want to use (POST for our form)
-              url: 'api/courses', // the url where we want to POST
-              dataType: 'json', // what type of data do we expect back from the server
-              encode: true
-            })
-              // using the done promise callback
-              .done(function (data) {
-                // log data to the console so we can see
-                myList = data;
-                $('#myTable').html('');
-                buildHtmlTable('#myTable')
-                // here we will handle errors and validation messages
-              });
-  
-}
-    
-function validate(){
-if(myList.find(x=>x.cnic===$('input[name=cnic]').val())!=undefined){
-alert("Duplicate");
-$('input[name=cnic]').val('');
-}
+      $.ajax({
+        type: 'GET', // define the type of HTTP verb we want to use (POST for our form)
+        url: 'api/courses', // the url where we want to POST
+        dataType: 'json', // what type of data do we expect back from the server
+        encode: true
+      })
+        // using the done promise callback
+        .done(function (data) {
+          // log data to the console so we can see
+          myList = data;
+          $('#myTable').html('');
+          buildHtmlTable('#myTable')
+          // here we will handle errors and validation messages
+        });
 
-}
+    }
+
+    function validate() {
+      if (myList.find(x => x.cnic === $('input[name=cnic]').val()) != undefined) {
+        alert("Duplicate");
+        $('input[name=cnic]').val('');
+      }
+
+    }
 
     function buildHtmlTable(selector) {
       var columns = addAllColumnHeaders(myList, selector);
@@ -208,7 +222,7 @@ $('input[name=cnic]').val('');
 
 
     $(document).ready(function () {
-    get();
+      get();
       // process the form
       $('form').submit(function (event) {
         // get the form data
